@@ -1,41 +1,59 @@
 import math as m
-def redshift(z,lo,le):
+
+global G
+G = 6.67*10**(-11)
+
+global h
+h = 1.05*10**(-34) 
+
+global c
+c = 3*10**8
+
+global kB
+kB = 1.38*10**(-23)
+
+global sigma
+sigma = 5.67*10**(-8)
+
+global a
+a = 7.56*10**(-16)
+
+def redshift(lo,le):
   z = (lo-le)/le
   return z
 
-def kepler_law_3(T,r,m):
-  T = 2*m.pi*m.sqrt((r**3)/(6.67*10**-11)*m)
+def kepler_law_3(r,m):
+  T = 2*m.pi*m.sqrt((r**3)/(G*m))
   return T
 
-def hubble_law_distance(v,D):
-  v = 70*D
+def hubble_law_distance(v):
+  D = v/70
+  return D
+
+def escape_velocity(M,R):
+  v = m.sqrt((2*G*M)/R)
   return v
 
-def escape_velocity(v,M,R):
-  v = m.sqrt((2*(6.67*10**-11)*M)/R)
-  return v
-
-def Black_hole_temp(T,M):
-  T = ((1.05*10**-34)*(3*10**8)**3)/8*m.pi*(6.67*10**-11)*M*1.38*10**-23
+def Black_hole_temp(M):
+  T = (h*(c**3))/8*m.pi*G*M*kB
   return T
 
-def luminosity(L,A,T):
-  L = (5.67*10**-8)*A*T**4
+def luminosity(A,T):
+  L = sigma*A*T**4
   return L
 
-def orbital_period(T,rho):
-  T = m.sqrt((3*m.pi)/(6.67*10**-11)*rho)
+def orbital_period(rho):
+  T = m.sqrt((3*m.pi)/G*rho)
   return T
 
-def Schwarzschild_radius(g,M,r):
-  g = (6.67*10**-11)*M/r**2
-  return g
+def Schwarzschild_radius(g,M):
+  r = m.sqrt((G*M)/g)
+  return r
 
-def apparent_brightness(b,L,d):
+def apparent_brightness(L,d):
   b = L/(4*m.pi*d**2)
   return b
 
-def stellar_radiation_pressure(P,T):
-  P = 0.3*(7.56*10**-16)*T**4
-  return P
-
+def stellar_radiation_pressure(T):
+  P = 0.3*a*T**4
+  return 
