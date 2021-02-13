@@ -61,7 +61,7 @@ def Heat_Transfer(T,t,R):
   Q = -t*T/R
   return Q
 
-def Absorptive_Power(Ea,Ei):
+def absorbtive_power(Ea,Ei):
   Ap = Ea/Ei
   return Ap
 
@@ -77,7 +77,7 @@ def Hhyd(Hsol,Hlattice):
   Hhyd = Hsol - Hlattice
   return Hhyd
 
-def GibbsEnergy(H,T,S):
+def Gibbs_Energy(H,T,S):
   G = H - T*S
   return G
 
@@ -85,7 +85,7 @@ def Entropy(q,T):
   S = q/T
   return S
 
-def Enthalpyofreaction(Hreact,Hproduct):
+def Enthalpy_of_Reaction(Hreact,Hproduct):
   Hrxn = Hreact - Hproduct
   return Hrxn
 
@@ -93,7 +93,7 @@ def thermalstress(strain,Y):
   stress = strain*Y
   return stress
 
-def LatentHeat(Q,m):
+def Latent_Heat(Q,m):
   LH = Q/m
   return LH
 
@@ -109,6 +109,6 @@ def InternalEnergy(f,n,R,T):
   U = f*n*R*T/2
   return U
 
-def IsobaricProcess(P,V1,V2):
+def Isobaricwork(P,V1,V2):
   W = P*(V2-V1)
   return W

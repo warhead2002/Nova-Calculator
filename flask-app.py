@@ -2,7 +2,7 @@ from flask import Flask, render_template,request
 import mechanics as mec
 import astrophysics as astro
 import waves as wa
-import thermo as th
+import thermo
 import quantum as q
 
 app = Flask(__name__)
@@ -463,7 +463,159 @@ def wein_law_pf():
         
     return render_template('quantum_wein_pf.html')
 
+# Thermodynamics Section
 
+@app.route('/thermodynamics')
+def thermodynamics():
+    return render_template('thermodynamics.html')
+
+
+# add your module functions here
+# start of thermo subsection
+@app.route('/thermodynamics/Absorbtive-power', methods=['GET', 'POST'])
+def absorbtive_power():
+    if request.method == 'POST':
+        a = int(request.form.get('one'))
+        b = int(request.form.get('two'))
+        absorbpower = thermo.absorbtive_power(a, b)
+        return '<br><br><br><br><br><br><br><br><center><h1>absorbtive Latent_Heat is: ' + str(
+            absorbpower) + '</h1></center>'
+
+    return render_template('Absorbtive-power.html')
+
+
+@app.route('/thermodynamics/Emissivity', methods=['GET', 'POST'])
+def Emissivity():
+    if request.method == 'POST':
+        m = float(request.form.get('one'))
+        r = float(request.form.get('two'))
+        Emissivity = thermo.Emissivity(m, r)
+        return '<br><br><br><br><br><br><br><br><center><h1>Emissivity is: ' + str(Emissivity) + '</h1></center>'
+
+    return render_template('Emissivity.html')
+
+
+@app.route('/thermodynamics/Enthalpy-of-Reaction', methods=['GET', 'POST'])
+def Enthalpy_of_Reaction():
+    if request.method == 'POST':
+        m = float(request.form.get('one'))
+        a = float(request.form.get('two'))
+        Enthalpy_of_Reaction = thermo.Enthalpy_of_Reaction(m, a)
+        return '<br><br><br><br><br><br><br><br><center><h1>Enthalpy of Reaction is: ' + str(
+            Enthalpy_of_Reaction) + ' Joule' + '</h1></center>'
+
+    return render_template('Enthalpy-of-Reaction.html')
+
+
+@app.route('/thermodynamics/Entropy', methods=['GET', 'POST'])
+def Entropy():
+    if request.method == 'POST':
+        u = float(request.form.get('one'))
+        n = float(request.form.get('two'))
+        Entropy = thermo.Entropy(u, n)
+        return '<br><br><br><br><br><br><br><br><center><h1>Frictional Enthalpy_of_Reaction is: ' + str(
+            Entropy) + ' Joule/K' + '</h1></center>'
+
+    return render_template('Entropy.html')
+
+
+@app.route('/thermodynamics/first-law-of-thermodynamics', methods=['GET', 'POST'])
+def first_law_of_thermodynamics():
+    if request.method == 'POST':
+        m = float(request.form.get('one'))
+        v = float(request.form.get('two'))
+        Flot = thermo.first_law_of_thermodynamics(m, v)
+        return '<br><br><br><br><br><br><br><br><center><h1>First law of thermodynamics is: ' + str(
+            Flot) + ' Joule' + '</h1></center>'
+
+    return render_template('first-law-of-thermodynamics.html')
+
+
+@app.route('/thermodynamics/Gibbs-Energy', methods=['GET', 'POST'])
+def Gibbs_Energy():
+    if request.method == 'POST':
+        f = float(request.form.get('one'))
+        s = float(request.form.get('two'))
+        thet = float(request.form.get('three'))
+        GE = thermo.Gibbs_Energy(f, s, thet)
+        return '<br><br><br><br><br><br><br><br><center><h1>Work is: ' + str(GE) + ' Joule' + '</h1></center>'
+
+    return render_template('Gibbs-Energy.html')
+
+
+@app.route('/thermodynamics/Heat-Capacity-Ratio', methods=['GET', 'POST'])
+def Heat_Capacity_Ratio():
+    if request.method == 'POST':
+        m = float(request.form.get('one'))
+        v = float(request.form.get('two'))
+        ratio = thermo.Heat_Capacity_Ratio(m, v)
+        return '<br><br><br><br><br><br><br><br><center><h1>Heat Capacity Ratio is: ' + str(ratio) + '</h1></center>'
+
+    return render_template('Heat-Capacity-Ratio.html')
+
+
+@app.route('/thermodynamics/Isobaric-Work-done', methods=['GET', 'POST'])
+def Isobaricwork():
+    if request.method == 'POST':
+        m = float(request.form.get('one'))
+        g = float(request.form.get('two'))
+        h = float(request.form.get('three'))
+        energy = thermo.Isobaricwork(m, g, h)
+        return '<br><br><br><br><br><br><br><br><center><h1>Isobaric Work Done is: ' + str(
+            energy) + ' Joule' + '</h1></center>'
+
+    return render_template('Isobaric-Work-done.html')
+
+
+@app.route('/thermodynamics/Latent-Heat', methods=['GET', 'POST'])
+def Latent_Heat():
+    if request.method == 'POST':
+        w = float(request.form.get('one'))
+        t = float(request.form.get('two'))
+        Latent_Heat = thermo.Latent_Heat(w, t)
+        return '<br><br><br><br><br><br><br><br><center><h1>Latent Heat is: ' + str(
+            Latent_Heat) + ' Joule' + '</h1></center>'
+
+    return render_template('Latent-Heat.html')
+
+
+@app.route('/thermodynamics/Linear-Expansion', methods=['GET', 'POST'])
+def Linear_Expansion():
+    if request.method == 'POST':
+        m = float(request.form.get('one'))
+        r = float(request.form.get('two'))
+        c = float(request.form.get('three'))
+        LinearExpansion = thermo.Linear_Expansion(m, r, c)
+        return '<br><br><br><br><br><br><br><br><center><h1>Linear Expansion is: ' + str(
+            LinearExpansion) + ' metre' + '</h1></center>'
+
+    return render_template('Linear-Expansion.html')
+
+
+@app.route('/thermodynamics/specific-heat', methods=['GET', 'POST'])
+def Specific_Heat():
+    if request.method == 'POST':
+        f = float(request.form.get('one'))
+        t = float(request.form.get('two'))
+        x = float(request.form.get('three'))
+        Specific_Heat = thermo.Specific_Heat(f, t, x)
+        return '<br><br><br><br><br><br><br><br><center><h1>Specific Heat is: ' + str(
+            Specific_Heat) + ' Joule/(kg*K)' + '</h1></center>'
+
+    return render_template('specific-heat.html')
+
+
+@app.route('/thermodynamics/Thermal-Resistance', methods=['GET', 'POST'])
+def Thermal_Resistance():
+    if request.method == 'POST':
+        i = float(request.form.get('one'))
+        m = float(request.form.get('two'))
+        u = float(request.form.get('three'))
+        rad = thermo.Thermal_Resistance(i, m, u)
+        return '<br><br><br><br><br><br><br><br><center><h1>Thermal Resistance is: ' + str(
+            rad) + ' K/watt' + '</h1></center>'
+
+    return render_template('Thermal-Resistance.html')
 
 
 
